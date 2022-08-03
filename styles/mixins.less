@@ -1,0 +1,32 @@
+.positionAbsolute(@top, @left) {
+  position: absolute;
+  top: @top;
+  left: @left;
+}
+
+.flex(@direction, @justify, @align: inherit) {
+  display: flex;
+  flex-direction: @direction;
+  justify-content: @justify;
+  align-items: @align;
+}
+
+#dark-mode {
+  .button {
+    background-color: @dm-highlight;
+    &:disabled {
+      background-color: darken(@base-color, 85%);
+    }
+  }
+
+  .circle {
+    border-color: fade(@dm-highlight, 50%);
+    background-color: lighten(@dm-base-color, 5%);
+  }
+
+  .active-circle {
+    border-color: @dm-highlight;
+    background-color: lighten(@dm-base-color, 5%);
+    color: @dm-highlight;
+  }
+}

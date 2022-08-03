@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Muli&display=swap");
+@import "variables.less";
+@import "mixins.less";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  .flex(row, center, center);
+  overflow: hidden;
+  margin: 0;
+  font-family: "Muli", sans-serif;
+  background-color: @base-color;
+
+  .container {
+    text-align: center;
+
+    .toggle {
+      position: absolute;
+      top: 1vh;
+      right: 0.5vw;
+      width: fit-content !important;
+    }
+
+    .progress-container {
+      .flex(row, space-between);
+      position: relative;
+      max-width: 100%;
+      width: 20em;
+      margin-bottom: 30px;
+
+      &::before {
+        .positionAbsolute(50%, 0);
+        content: "";
+        z-index: -1;
+        transform: translateY(-50%);
+        height: 4px;
+        width: 100%;
+        background-color: @line-border-empty;
+      }
+    }
+
+    .progress {
+      .positionAbsolute(50%, 0);
+      height: 4px;
+      width: 0%;
+      z-index: -1;
+      transform: translateY(-50%);
+      background-color: @line-border-full;
+      transition: 0.4s ease;
+    }
+
+    .circle {
+      .flex(row, center, center);
+      height: 2.5em;
+      width: 2.5em;
+      background-color: #fff;
+      color: rgb(138, 136, 136);
+      border-radius: 50%;
+      border: 3px solid @line-border-empty;
+      transition: 0.4s ease;
+    }
+
+    .circle.active {
+      border-color: @line-border-full;
+    }
+
+    .btn {
+      width: 7rem;
+      padding: 8px 30px;
+      margin: 5px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      background-color: @line-border-full;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        background-color: @line-border-empty;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+body.dark {
+  background-color: darken(@base-color, 85%);
+
+  .container {
+    .progress-container {
+      &::before {
+        .positionAbsolute(50%, 0);
+        content: "";
+        z-index: -1;
+        transform: translateY(-50%);
+        height: 4px;
+        width: 100%;
+        background-color: fade(@dm-highlight, 50%);
+      }
+
+      .progress.dark {
+        background-color: @dm-highlight;
+      }
+
+      .circle.dark {
+        #dark-mode.circle();
+      }
+      .circle.active.dark {
+        #dark-mode.active-circle();
+      }
+    }
+
+    .btn.dark {
+      #dark-mode.button();
+    }
+  }
+}
